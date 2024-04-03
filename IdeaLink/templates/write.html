@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Oswald&family=Roboto&display=swap"
+    rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .heading{
+            font-family: 'Roboto', sans-serif;
+            font-size: 40px;
+            color:rgb(152, 150, 150);
+            text-align: center;
+        }
+        form{
+            text-align: center;
+        }
+        .title{
+            margin-top: 20px;
+            /* margin-left: 24%; */
+            height:5vh;
+            width: 50%;
+            padding: 12px 10px;
+            /* border-radius: 30px; */
+            border: 0px;
+            /* border: 1px grey solid; */
+        }
+        .title::placeholder 
+        {
+            font-size:20px;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            color:rgb(152, 150, 150);
+        }
+        textarea{
+            height:40vh;
+            width:45vw;
+            margin-top: 20px;
+            font-family: 'Roboto', sans-serif;
+            color:rgb(152, 150, 150);
+        }
+        .select{
+            font-size: 20px;
+            margin-top: 20px;
+            font-family: 'Roboto', sans-serif;
+            color:rgb(152, 150, 150);
+        }
+        .post{
+            margin-top: 70px;
+            padding:10px;
+            border-radius: 13%;
+            background-color: black;
+            color:white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heading">Hey {{request.user.first_name}},<br>Let your thoughts take flight through words.</div>
+   
+    <form method="post" action="/IdeaLink/write/{{request.user.username}}">
+        {% csrf_token%}
+        <input class="title" type="text" placeholder="Title of the blog" name="title"><br>
+        <textarea name="content"> your blog goes here...!!
+        </textarea><br>
+        <!-- <input type="textarea" placeholder="blog content" name="content"><br> -->
+        <label class="select" for="dropdown">Select an option:</label>
+        <select class="select" id="dropdown" name="dropdown">
+            <option value="General">None</option>
+            <option value="HealthCare">HealthCare</option>
+            <option value="Education">Education</option>
+            <option value="Technology">Technology</option>
+            <option value="Sports">Sports</option>
+            <option value="Science">Science</option>
+        </select>
+        <input type="text" class="select" placeholder="Custom field" name="custom"><br>
+        <input class="post" type="submit" value="Post Blog">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Oswald&family=Roboto&display=swap"
+        rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* .main{
+            display: flex;
+        } */
+        .form_part label {
+            text-align: right;
+            font-weight: 700;
+            
+            /* margin-right: 10px;  */
+        }
+
+        .align-right {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        img {
+            height: 100vh;
+        }
+
+        .form_part {
+            /* text-align: center; */
+            margin: auto;
+        }
+
+        input[type=text],
+        input[type=password] {
+            height:5vh;
+            width: 50%;
+            padding: 12px 10px;
+            margin: 8px 0;
+            /* box-sizing: border-box;
+            border: none;
+            border-bottom: 2px solid black; */
+        } 
+        input[type=submit]{
+            background-color: black;
+            color:white;
+            margin-top: 20px;
+            padding: 8px 20px;
+           border-radius: 32px;
+            /* border-radius: 50px / 50%; */
+        }
+        .roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .heading{
+            /* text-align: center; */
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .new{
+            margin-top: 10px;
+            font-size: 15px;
+        }
+        .reg{
+            color:black;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .link{
+            color:grey;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        .link:hover{
+            color: black;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main container-fluid">
+        <div class="row">
+            <div class="col-md-4 align-right">
+                <img style="width:fit-content" src="{% static 'img/signin_f.jpg' %}">
+            </div>
+
+            <div class="col-md-6 form_part">
+                {% if error %}
+                {{error}}
+                {% endif %}
+                <div class="heading roboto">Sign in</div>
+                <form method="post" action="/IdeaLink/signin">
+                    {% csrf_token %}
+                    <label>Username</label><br>
+                    <input type="text" placeholder="Enter your username" name="username" class="field" required><br>
+                    <label>Password</label><br>
+                    <input type="password" placeholder="Enter your password" name="pwd" class="field" required><br>
+                    <input type="submit" class="field" value="Sign in">
+                </form>
+                <div class="new roboto">New User?<a href="signup" class="reg"> Register</a></div>
+            </div>
+
+            <div class="col-md-2" style="text-align: right;">
+                <a href="http://127.0.0.1:8000/IdeaLink/" class="roboto link">Home </a>
+                <a href="http://127.0.0.1:8000/IdeaLink/signup" class="roboto link">Sign-Up</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
