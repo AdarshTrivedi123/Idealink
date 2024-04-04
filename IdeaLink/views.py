@@ -16,7 +16,10 @@ def home(request):
     blog_item= blog.objects.order_by('-id')[:6]
 
     all_posts = blog.objects.all()
-    random_posts = random.sample(list(all_posts), k=6)
+    if all_posts.count() >6:
+        random_posts = random.sample(list(all_posts), k=6)
+    else:
+        random_posts=all_posts
     review_items= Reviews.objects.all()
     return render(request,"home.html",{"blog_item":blog_item,"top_blogs":top_blogs,"random_posts":random_posts, "review_items":review_items})
 
