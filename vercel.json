@@ -3,7 +3,7 @@
   "builds": [
     {
       "src": "blog/wsgi.py",
-      "use": "@vercel/python",
+      "use": "@ardnt/vercel-python-wsgi",
       "config": {
         "maxLambdaSize": "15mb"
       }
