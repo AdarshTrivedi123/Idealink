@@ -54,12 +54,21 @@
             background-color: black;
             color:white;
         }
+        a{
+            color: black;
+            text-decoration: none;
+            font-style: italic;
+        }
     </style>
 </head>
 
 <body>
+    {% if user.is_authenticated %}
     <div class="heading">Hey {{request.user.first_name}},<br>Let your thoughts take flight through words.</div>
-   
+    {% endif %}
+    {% if not user.is_authenticated %}
+    <div class="heading">To write a blog first <a href="/IdeaLink/signin">Signin</a></div>
+    {% endif %}
     <form method="post" action="/IdeaLink/write/{{request.user.username}}">
         {% csrf_token%}
         <input class="title" type="text" placeholder="Title of the blog" name="title"><br>

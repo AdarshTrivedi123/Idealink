@@ -6,6 +6,7 @@ from django.contrib import auth
 from django.db.models import Count,Subquery, OuterRef
 from django.db import connection
 from .models import blog,like_blog,cmnt_blog,Bookmark_blog, Reviews
+from django.contrib.auth.decorators import login_required
 import random
 # Create your views here.
 def home(request):
@@ -73,7 +74,8 @@ def logout(request):
     auth.logout(request)
     return render(request,"home.html")
 
-def write(request,uname):
+
+def write(request):
     if request.method=='POST':
 
         title=request.POST.get('title')
@@ -85,9 +87,9 @@ def write(request,uname):
         else:
             category=set_category
         
-        blog_data= blog(title=title,content=content,category=category,username=uname)
+        blog_data= blog(title=title,content=content,category=category,username=request.user.username)
         blog_data.save()
-        return redirect('dashboard',uname=uname)
+        return redirect('dashboard',uname=request.user.username)
         # return HttpResponse("Blog submitted")
 
     return render(request,'write.html')

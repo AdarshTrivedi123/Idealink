@@ -7,7 +7,7 @@ urlpatterns=[
     path('signin',views.signin),
     path('dashboard/<uname>',views.dashboard,name='dashboard'),
     path('logout',views.logout),
-    path('write/<uname>',views.write),
+    path('write',views.write),
     path('fullblog/<int:id>',views.full_blog,name='full_blog'),
     path('category',views.category),
     path('type/<cat>',views.type),
