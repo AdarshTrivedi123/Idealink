@@ -86,24 +86,23 @@ def logout(request):
     return render(request,"home.html")
 
 
-def write(request):
-    if request.method=='POST':
-
-        title=request.POST.get('title')
-        content=request.POST.get('content')
-        set_category=request.POST.get('dropdown')
-        custom_category=request.POST.get('custom')
-        if(set_category=="none"):
-            category=custom_category
-        else:
-            category=set_category
+def write(request, uname=None):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        set_category = request.POST.get('dropdown')
+        custom_category = request.POST.get('custom')
         
-        blog_data= blog(title=title,content=content,category=category,username=request.user.username)
+        if set_category == "none":
+            category = custom_category
+        else:
+            category = set_category
+        
+        blog_data = blog(title=title, content=content, category=category, username=request.user.username)
         blog_data.save()
-        return redirect('dashboard',uname=request.user.username)
-        # return HttpResponse("Blog submitted")
+        return redirect('dashboard', uname=request.user.username)
 
-    return render(request,'write.html')
+    return render(request, 'write.html')
 
 def full_blog(request,id):
     blog_item=blog.objects.filter(id=id)
