@@ -57,18 +57,29 @@ def signin(request):
          
     return render(request,'signin.html')
 
-def dashboard(request,uname):
-        book_blog_ids=Bookmark_blog.objects.filter(user_id=uname).only("blog_id")
-        for item in book_blog_ids:
-            bookmark_item = blog.objects.filter(id=item.blog_id)
+def dashboard(request, uname):
+    book_blog_ids = Bookmark_blog.objects.filter(user_id=uname).only("blog_id")
+    bookmark_item = []
+    for item in book_blog_ids:
+        try:
+            blog_object = blog.objects.get(id=item.blog_id)
+            bookmark_item.append(blog_object)
+        except blog.DoesNotExist:
+            pass
 
-        blog_item= blog.objects.filter(username=uname)
-        # like_item=like_blog.objects.filter(user_id=uname)
-        blog_ids = like_blog.objects.filter(user_id=uname).only("blog_id")
-        for item in blog_ids:
-            like_item = blog.objects.filter(id=item.blog_id)
+    blog_item = blog.objects.filter(username=uname)
+    
+    blog_ids = like_blog.objects.filter(user_id=uname).only("blog_id")
+    like_item = []
+    for item in blog_ids:
+        try:
+            blog_object = blog.objects.get(id=item.blog_id)
+            like_item.append(blog_object)
+        except blog.DoesNotExist:
+            pass
 
-        return render(request,"dashboard.html",{"blog_item":blog_item,"bookmark_item":bookmark_item,"like_item":like_item})
+    return render(request, "dashboard.html", {"blog_item": blog_item, "bookmark_item": bookmark_item, "like_item": like_item})
+
 
 def logout(request):
     auth.logout(request)
