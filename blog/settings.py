@@ -79,12 +79,15 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'HOST': 'monorail.proxy.rlwy.net',
-        'PORT':  '21140',
-        'USER': 'root',
-        'PASSWORD': 'UzNCSoUzYnIYbCuvSnhFtkdzMULHTqOg',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'idealink_data',
+        'HOST': 'ep-steep-poetry-a1fz45f8.ap-southeast-1.aws.neon.tech',
+        'PORT': '5432',
+        'USER': 'idealink_data_owner',
+        'PASSWORD': 'ATtzbfXNG04l',
+        'OPTIONS': {
+            'sslmode': 'require',
+        }
     }
 }
 
